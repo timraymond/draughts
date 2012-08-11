@@ -8,7 +8,7 @@ drawBoard = (board) ->
 
       cellWidth = canvas.width / 8
       cellHeight = canvas.height / 8
-      
+
       # Draw the Checkerboard
       for rank in [0...8]        # Loop through ranks
           color = 'white' if rank % 2 == 0
@@ -30,11 +30,11 @@ drawBoard = (board) ->
               context.stroke() 
               context.fillStyle = type
               context.fill()
-    # Setup click listener
-    #$('#can').click -> (e)
-        #file = Math.floor((e.pageX-$("#can").offset().left) / 8)
-        #rank = Math.floor((e.pageY-$("#can").offset().top) / 8)
-        #console.log {rank: rank, file: file}        
+
+      $('#can').click (e) ->
+        file = Math.floor((e.pageX-$("#can").offset().left) / 8)
+        rank = Math.floor((e.pageY-$("#can").offset().top) / 8)
+        console.log {rank: rank, file: file}        
 
 pdnToRF = (pdnLocation) ->
     currentpdn = 32
@@ -50,19 +50,16 @@ pdnToRF = (pdnLocation) ->
 
 parseGame = (ctp_game) ->
   board_text = ctp_game.split(":")[0]
-  board = {white: [], black: []}
+  board = {white: [], black: [], yellow: []}
   current_idx = 1
   for square in board_text
     switch square
       when 'b' then board.black.push current_idx
       when 'w' then board.white.push current_idx
+      when 'B' then board.yellow.push current_idx
+      when 'W' then board.yellow.push current_idx
     current_idx = current_idx + 1
   board
-
-board =
-    white: [32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21]
-    black: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    kings: []
     
 jQuery ->
   canvas = document.getElementById 'can'
