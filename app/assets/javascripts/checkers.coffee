@@ -1,4 +1,6 @@
-drawBoard = (board) ->
+root = exports ? this
+
+root.drawBoard = (board) ->
     # Assumes that the board is valid
     
     # Get the canvas context
@@ -48,7 +50,7 @@ pdnToRF = (pdnLocation) ->
     {rank: currRank, file: currFile}
             
 
-parseGame = (ctp_game) ->
+root.parseGame = (ctp_game) ->
   board_text = ctp_game.split(":")[0]
   board = {white: [], black: [], yellow: []}
   current_idx = 1
@@ -65,3 +67,7 @@ jQuery ->
   canvas = document.getElementById 'can'
   board = parseGame canvas.getAttribute 'data-board'
   drawBoard(board)
+
+  $('document')
+    .bind "ajax:success", (event, data) ->
+      alert "Ajax SUCCESS!!!"

@@ -15,6 +15,8 @@ class GamesController < ApplicationController
 
     Stalker.enqueue("game.ai_move", :state => engine.to_s)
 
-    redirect_to :action => "show", :id => 0
+    respond_to do |format|
+      format.js
+    end
   end
 end
