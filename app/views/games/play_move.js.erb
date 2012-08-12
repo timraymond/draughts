@@ -1,2 +1,4 @@
-drawBoard(parseGame("<%= @game.state %>"));
+<% publish_to "/game/moves" do %>
+  drawBoard(parseGame("<%= @game.state %>"));
+<% end %>
 $('#move').reset();

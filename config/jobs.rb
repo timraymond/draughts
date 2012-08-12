@@ -13,4 +13,5 @@ job "game.ai_move" do |state|
     end
     game.state = engine.to_s
     game.save
+    PrivatePub.publish_to("/game/moves", "drawBoard(parseGame('#{game.state}'))")
 end
