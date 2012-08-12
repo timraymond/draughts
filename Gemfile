@@ -25,6 +25,7 @@ gem 'stalker'
 gem 'private_pub'
 gem 'faye'
 gem 'thin'
+gem 'foreman'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

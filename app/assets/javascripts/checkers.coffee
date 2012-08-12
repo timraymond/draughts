@@ -42,6 +42,7 @@ root.drawBoard = (board) ->
 
         if clicks.length == 2
           $.post("/games/0/play_move", move: "#{clicks[0]}x#{clicks[1]}")
+          clicks = []
 
 pdnToRF = (pdnLocation) ->
     currentpdn = 32
@@ -81,7 +82,3 @@ jQuery ->
   canvas = document.getElementById 'can'
   board = parseGame canvas.getAttribute 'data-board'
   drawBoard(board)
-
-  $('document')
-    .bind "ajax:success", (event, data) ->
-      alert "Ajax SUCCESS!!!"
