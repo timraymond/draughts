@@ -33,10 +33,15 @@ root.drawBoard = (board) ->
               context.fillStyle = type
               context.fill()
 
+      clicks = []
       $('#can').click (e) ->
-        file = Math.floor((e.pageX-$("#can").offset().left) / 8)
-        rank = Math.floor((e.pageY-$("#can").offset().top) / 8)
-        console.log {rank: rank, file: file}        
+        file = Math.floor((e.pageX-$("#can").offset().left) / cellWidth)
+        rank = Math.floor((e.pageY-$("#can").offset().top) / cellHeight)
+        pdn  = RFTopdn(rank, file)
+        clicks.push pdn
+
+        if clicks.length == 2
+          $.post("/games/0/play_move", move: "#{clicks[0]}x#{clicks[1]}")
 
 pdnToRF = (pdnLocation) ->
     currentpdn = 32
@@ -48,7 +53,16 @@ pdnToRF = (pdnLocation) ->
                currFile -= currRank % 2
            currentpdn -= 1
     {rank: currRank, file: currFile}
-            
+
+RFTopdn = (rank, file) ->
+  currentpdn = 32
+  for current_rank in [0...8]
+    for current_file in [1,3,5,7]
+      current_file -= current_rank % 2
+      if current_rank == rank && current_file == file
+        return currentpdn
+      currentpdn -= 1
+  currentpdn
 
 root.parseGame = (ctp_game) ->
   board_text = ctp_game.split(":")[0]

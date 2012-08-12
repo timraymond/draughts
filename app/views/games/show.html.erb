@@ -1,11 +1,3 @@
 <canvas id="can" width="500" height="500" data-board="<%= @game.to_s %>"></canvas>
-<p><%= @game.to_s %></p>
-<p><%= @game.options %></p>
-<%= form_tag("/games/0/play_move", :method => "post", :remote => true) do %>
-
-  <%= label_tag(:move, "Type Move:") %>
-  <%= text_field_tag(:move) %>
-  <%= submit_tag("Play Move") %>
-<% end %>
 
 <%= subscribe_to "/game/moves" %>
