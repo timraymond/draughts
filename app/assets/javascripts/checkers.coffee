@@ -24,7 +24,6 @@ root.drawBoard = (board) ->
       for type, locations of board
           for location in locations
               coord = pdnToRF(location)
-              console.log coord
               context.beginPath()
               context.arc((coord.file*cellWidth)+cellWidth/2, (coord.rank*cellHeight)+cellHeight/2, ((cellWidth+cellHeight)/4)*0.8, 0, Math.PI * 2, false)
               context.closePath()
@@ -34,7 +33,8 @@ root.drawBoard = (board) ->
               context.fill()
 
       clicks = []
-      $('#can').click (e) ->
+      $('#can').hammer({}).on "tap", (ev) ->
+        e = ev.originalEvent
         file = Math.floor((e.pageX-$("#can").offset().left) / cellWidth)
         rank = Math.floor((e.pageY-$("#can").offset().top) / cellHeight)
         pdn  = RFTopdn(rank, file)
