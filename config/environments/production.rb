@@ -64,4 +64,20 @@ Draughts::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  # config/environments/production.rb
+
+  # Fix for production logging problems
+  
+  path = config.paths["log"].first
+  unless File.exist? File.dirname path
+    FileUtils.mkdir_p File.dirname path
+  end
+  f = File.open path, 'w'
+  f.binmode
+  f.sync = true
+
+  config.logger = ActiveSupport::TaggedLogging.new(
+    ActiveSupport::BufferedLogger.new(f)
+  )
+  config.logger.level = ActiveSupport::BufferedLogger.const_get(config.log_level.to_s.upcase)
 end
