@@ -11,6 +11,8 @@ if defined?(Bundler)
 end
 
 module Draughts
+  # Workaround for production logging bug
+  Rails.logger.instance_variable_get(:@logger).instance_variable_get(:@log_dest).sync = true if Rails.logger
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
