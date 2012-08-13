@@ -32,6 +32,12 @@ GEM
     arel (3.0.2)
     beanstalk-client (1.1.1)
     builder (3.0.0)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -64,6 +70,7 @@ GEM
       eventmachine (>= 0.12.0)
     foreman (0.53.0)
       thor (>= 0.13.6)
+    highline (1.6.13)
     hike (1.2.1)
     http_parser.rb (0.5.3)
     i18n (0.6.0)
@@ -79,6 +86,13 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.3.6)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     polyglot (0.3.3)
     private_pub (1.0.1)
       faye
@@ -139,6 +153,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
   coffee-rails (~> 3.2.1)
   faye
   foreman
