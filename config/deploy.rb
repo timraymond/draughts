@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 server "50.57.96.38", :web, :app, :db, primary: true
 
 set :application, "draughts"
