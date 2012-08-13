@@ -2,6 +2,7 @@ server "50.57.96.38", :web, :app, :db, primary: true
 
 set :application, "draughts"
 set :user, "deployer"
+set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
