@@ -1,6 +1,7 @@
 Draughts::Application.routes.draw do
   resources :games do
     post 'play_move'
+    get  'reset'
   end
 
   # The priority is based upon order of creation:

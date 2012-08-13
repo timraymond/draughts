@@ -1,3 +1,4 @@
 <canvas id="can" width="500" height="500" data-board="<%= @game.to_s %>"></canvas>
 
+<%= link_to "Reset Game", game_reset_path(0) %>
 <%= subscribe_to "/game/moves" %>

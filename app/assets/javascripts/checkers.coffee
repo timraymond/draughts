@@ -1,5 +1,7 @@
 root = exports ? this
 
+listener = null
+
 root.drawBoard = (board) ->
     # Assumes that the board is valid
     
@@ -32,17 +34,20 @@ root.drawBoard = (board) ->
               context.fillStyle = type
               context.fill()
 
-      clicks = []
-      $('#can').hammer({}).on "tap", (ev) ->
-        e = ev.originalEvent
-        file = Math.floor((e.pageX-$("#can").offset().left) / cellWidth)
-        rank = Math.floor((e.pageY-$("#can").offset().top) / cellHeight)
-        pdn  = RFTopdn(rank, file)
-        clicks.push pdn
+      if listener == null
+        listener = true
+        clicks = []
+        $('#can').click (e) ->
+          file = Math.floor((e.pageX-$("#can").offset().left) / cellWidth)
+          rank = Math.floor((e.pageY-$("#can").offset().top) / cellHeight)
+          pdn  = RFTopdn(rank, file)
+          clicks.push pdn
 
-        if clicks.length == 2
-          $.post("/games/0/play_move", move: "#{clicks[0]}x#{clicks[1]}")
-          clicks = []
+          console.log clicks.length
+
+          if clicks.length == 2
+            $.post("/games/0/play_move", move: "#{clicks[0]}x#{clicks[1]}")
+            clicks = []
 
 pdnToRF = (pdnLocation) ->
     currentpdn = 32
